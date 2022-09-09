@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main section */
+
+#main {
+    height: 95vh;
+    width: 100%;
+    background: url(images/Wallpaper.jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Header in main section */
+
+#main #header {
+    height: 10%;
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+#main #header .sun_icon {
+    width: 2.3em;
+    height: 2.3em;
+    margin-right: 0.5em;
+}
+
+#main #header .header_title {
+    font-weight: 800;
+    font-size: 1.2em;
+}
+
+/* Add City section */
+
+#main #add_city {
+    height: 40%;
+    width: 65%;
+    padding: 3em;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#main #add_city > h3 {
+    margin-bottom: 1em;
+}
+
+#main #add_city > p {
+    margin-bottom: 3em;
+}
+
+#main #add_city #input_field {
+    height: 2.8em;
+    background: white;
+    width: 100%;
+    border-radius: 0.3em;
+    padding: 0.3em;
+}
+
+#main #add_city #input_field #input_btn, #main #add_city #input_field #input_text {
+    height: 100%;
+}
+
+#main #add_city #input_field #input_text {
+    width: 85%;
+    padding-left: 1em;
+    border: none;
+}
+
+#main #add_city #input_field #input_btn {
+    width: 14%;
+    border: none;
+    border-radius: 0.3em;
+    float: right;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(46, 46, 103);
+}
+
+/* Displayed City section */
+
+#displayed_city {
+    height: 50%;
+    width: 85%;
+    margin: 0 auto;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+}
+
+.added_city {
+    width: 18%;
+    height: 80%;
+    background-color: white;
+    margin: 1% 1%;
+}
+
+/* Footer section */
+
+#footer {
+    height: 5vh;
+    width: 100%;
+    background-color: rgb(46, 46, 103);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#footer > p:first-child {
+    padding-right: 1em;
+    border-right: 1px solid white;
+}
+
+#footer > p:last-child {
+    padding-left: 1em;
+}
