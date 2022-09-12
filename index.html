@@ -24,42 +24,42 @@
                 <div id="input_field">
                     <input type="text" name="text" id="input_text" placeholder="Add city...">
                     <button id="input_btn">Add</button>
+                    <p id="type_error">error</p>
                 </div>
             </section>
 
             <!-- Displayed city section -->
-            <section id="displayed_city">
-                <article class="added_city">
-                    <h3>Novi Sad</h3>
-                    <p>Serbia</p>
-                    <span>22C</span>
-                    <a href="#">Viev City</a>
-                </article>
-                <article class="added_city">
-                    <h3>Novi Sad</h3>
-                    <p>Serbia</p>
-                    <span>22C</span>
-                    <a href="#">Viev City</a>
-                </article>
-                <article class="added_city">
-                    <h3>Novi Sad</h3>
-                    <p>Serbia</p>
-                    <span>22C</span>
-                    <a href="#">Viev City</a>
-                </article>
-                <article class="added_city">
-                    <h3>Novi Sad</h3>
-                    <p>Serbia</p>
-                    <span>22C</span>
-                    <a href="#">Viev City</a>
-                </article>
-                <article class="added_city">
-                    <h3>Novi Sad</h3>
-                    <p>Serbia</p>
-                    <span>22C</span>
-                    <a href="#">Viev City</a>
-                </article>
-            </section>
+            <section id="displayed_city"></section>
+
+            <!-- FORECAST SECTION -->
+
+            <div id="wrapperForecast">
+                <section id="cityInfo">
+                    <div id="cityHeader">
+                        <h2>Novi Sad</h2>
+                        <p>Vojvodina, Serbia</p>
+                        <p>45.2396N, 19.8227E</p>
+                    </div>
+                    <div id="cityTemp">
+                        <!-- <img class="sun_icon" src="images/sun_icon.png" alt="sun_icon"> -->
+                        <p>22°C</p>
+                    </div>
+                    <div id="cityData">
+                        <p><b>Feels like</b> <span>20C</span></p>
+                        <p><b>Humidity</b> <span>41%</span></p>
+                        <p><b>Pressure</b> <span>1005 mbar</span></p>
+                        <p><b>Wind</b> <span>3.1m/s SE</span></p>
+                        <p><b>UV index</b> <span>Low</span></p>
+                    </div>
+                </section>
+    
+                <section id="forecast">
+                    <div id="dayOne"></div>
+                    <div id="dayTwo"></div>
+                    <div id="dayTree"></div>
+                </section>
+            </div>
+
         </main>
 
         <!-- Footer section -->
@@ -68,5 +68,7 @@
             <p>Mad Duck Code</p>
         </footer>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
