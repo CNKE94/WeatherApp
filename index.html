@@ -9,15 +9,19 @@
 </head>
 <body>
     <div id="wrapper">
+        
         <!-- Main section -->
+
         <main id="main">
             <!-- Header in main section -->
+
             <header id="header">
-                <img class="sun_icon" src="images/sun_icon.png" alt="sun_icon">
-                <p class="header_title">WeatherStation</p>
+                <img class="sun_icon refresh" src="images/sun_icon.png" alt="sun_icon">
+                <p class="header_title refresh">WeatherStation</p>
             </header>
 
             <!-- Enter and add city section -->
+
             <section id="add_city">
                 <h3>Add Cities</h3>
                 <p>Add 5 cities whose temperature you want to track</p>
@@ -29,45 +33,68 @@
             </section>
 
             <!-- Displayed city section -->
+
             <section id="displayed_city"></section>
 
             <!-- FORECAST SECTION -->
 
             <div id="wrapperForecast">
                 <section id="cityInfo">
+
+                    <!-- City name, region and location -->
+
                     <div id="cityHeader">
-                        <h2>Novi Sad</h2>
-                        <p>Vojvodina, Serbia</p>
-                        <p>45.2396N, 19.8227E</p>
+                        <h2 id="cityForecast"></h2>
+                        <p id="region"></p>
+                        <p id="position"></p>
                     </div>
+
+                    <!-- Main city temperature and image of weather-->
+
                     <div id="cityTemp">
-                        <!-- <img class="sun_icon" src="images/sun_icon.png" alt="sun_icon"> -->
-                        <p>22°C</p>
+                        <img id="tempIcon" src="" alt="sun_icon">
+                        <p id="temperature"></p>
                     </div>
+
+                    <!-- City details -->
+
                     <div id="cityData">
-                        <p><b>Feels like</b> <span>20C</span></p>
-                        <p><b>Humidity</b> <span>41%</span></p>
-                        <p><b>Pressure</b> <span>1005 mbar</span></p>
-                        <p><b>Wind</b> <span>3.1m/s SE</span></p>
-                        <p><b>UV index</b> <span>Low</span></p>
+                        <p><b>Feels like</b> <span id="feelsLike"></span></p>
+                        <p><b>Humidity</b> <span id="humidy"></span></p>
+                        <p><b>Pressure</b> <span id="pressure"></span></p>
+                        <p><b>Wind</b> <span id="wind"></span></p>
+                        <p><b>UV index</b> <span id="uvIndex"></span></p>
                     </div>
                 </section>
     
+                <!-- Displayed 3 days for each city 24h -->
+
                 <section id="forecast">
-                    <div id="dayOne"></div>
-                    <div id="dayTwo"></div>
-                    <div id="dayTree"></div>
+                    <div id="dayOne">
+                        <h3 id="dateOne"></h3>
+                        <section id="forecastDayOne" class="forecastDays"></section>
+                    </div>
+                    <div id="dayTwo">
+                        <h3 id="dateTwo"></h3>
+                        <section id="forecastDayTwo" class="forecastDays"></section>
+                    </div>
+                    <div id="dayTree">
+                        <h3 id="dateTree"></h3>
+                        <section id="forecastDayTree" class="forecastDays"></section>
+                    </div>
                 </section>
             </div>
 
         </main>
 
         <!-- Footer section -->
+
         <footer id="footer">
             <p>Front-End Task</p>
             <p>Mad Duck Code</p>
         </footer>
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>
