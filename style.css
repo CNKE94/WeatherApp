@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: myFont;
+    src: url(font/Poppins-Regular.ttf);
+}
+
+body {
+    font-family: myFont, sans-serif;
+}
+
 /* Main section */
 
 #main {
@@ -69,16 +78,35 @@
     border-radius: 0.3em;
     padding: 0.3em;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 #main #add_city #input_field #input_btn, #main #add_city #input_field #input_text {
     height: 100%;
 }
 
+#main #add_city #input_field .plus {
+    width: 2.2em;
+    height: 2.2em;
+    color: white;
+    background-color: rgb(46, 46, 103);
+    border-radius: 50%;
+    border: none;
+    font-weight: 900;
+    margin-left: 0.6em;
+    cursor: pointer;
+}
+
+#main #add_city #input_field .plus:hover {
+    opacity: 0.9;
+}
+
 #main #add_city #input_field #input_text {
     width: 85%;
-    padding-left: 1em;
+    padding-left: 1.4em;
     border: none;
+    outline: none;
 }
 
 #main #add_city #input_field #input_btn {
@@ -138,12 +166,12 @@
 }
 
 #main #displayed_city .added_city > p {
-    margin-bottom: 2.5em;
+    margin-bottom: 1.5em;
     color: gray;
 }
 
 #main #displayed_city .added_city > span {
-    margin-bottom: 1em;
+    margin-bottom: 0.6em;
     font-size: 2.5em;
     font-weight: 800;
     color: rgb(46, 46, 103);
@@ -153,7 +181,7 @@
     text-decoration: none;
     color: white;
     background-color: rgb(46, 46, 103);
-    padding: 0.5em 2em;
+    padding: 0.5em 2.5em;
     border-radius: 0.4em;
 }
 
@@ -217,6 +245,10 @@
     margin-bottom: 0.5em;
 }
 
+#wrapperForecast #cityInfo #cityHeader #position {
+    display: flex;
+}
+
 #wrapperForecast #cityInfo #cityTemp > p {
     font-weight: 800;
     font-size: 3em;
@@ -237,6 +269,7 @@
     background-color: white;
     border-radius: 0.5em;
     padding: 1em;
+    color: rgb(46, 46, 103);
 }
 
 #wrapperForecast #forecast #dayOne, #wrapperForecast #forecast #dayTwo, #wrapperForecast #forecast #dayTree {
@@ -245,7 +278,7 @@
 }
 
 .forecastDays {
-    height: 100%;
+    height: 80%;
     width: 100%;
     display: flex;
     justify-content: space-between;
