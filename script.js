@@ -1,5 +1,5 @@
 const cityName = document.getElementById(`input_text`);
-const addCityBtn = document.getElementById(`input_btn`);
+const addCityBtn = document.querySelectorAll(`.addCityBtn`);
 
 const sunIcon = document.querySelector(`.sun_icon`);
 const header_title = document.getElementById(`header_title`);
@@ -18,7 +18,8 @@ const uvIndex = document.getElementById(`uvIndex`);
 const humidy = document.getElementById(`humidy`);
 const feelsLike = document.getElementById(`feelsLike`);
 const temperature = document.getElementById(`temperature`);
-const position = document.getElementById(`position`);
+const positionN = document.getElementById(`positionN`);
+const positionE = document.getElementById(`positionE`);
 const region = document.getElementById(`region`);
 const cityForecast = document.getElementById(`cityForecast`);
 const tempIcon = document.getElementById(`tempIcon`);
@@ -31,48 +32,14 @@ const dayOne = document.getElementById(`forecastDayOne`);
 const dayTwo = document.getElementById(`forecastDayTwo`);
 const dayTree = document.getElementById(`forecastDayTree`);
 
+// LocalStorage
 const cityInLS = JSON.parse(localStorage.getItem('AddedCity')) || [];
 
-window.onload = () => {
-    // sectionAddCity.style.display = `none`;
-    // displayCity.style.display = `none`;
-    // main.style.height = `120vh`;
-    // wrapperForecast.style.display = 'block';
-
-    displayCityList();
-    for (const i in cityInLS) {
-        $.ajax({
-            method: 'GET',
-            url: 'https://api.api-ninjas.com/v1/weather?city=' + cityInLS[i].name,
-            headers: { 'X-Api-Key': 'NpbkZwyOilO2PC3FrakOQg==gaOA2SG7o5Qfar1I'},
-            contentType: 'application/json',
-            success: function(result) {
-                let cityTemp = result.temp;
-                cityInLS[i].temp = cityTemp;
-                localStorage.setItem(`AddedCity`, JSON.stringify(cityInLS));
-
-                errorMessage.style.display = 'none';
-            },
-            error: function ajaxError(jqXHR) {
-                console.error('Error: ', jqXHR.responseText);
-                errorMessage.textContent = `City doesn't exist!`;
-                errorMessage.style.display = 'block';
-            }
-        });
-    }
-}
-
-document.querySelectorAll('.refresh').forEach((item) => {
-    item.addEventListener('click', event => {
-      location.reload();
-    })
-});
-
-function addCity(tempr) {          
+// function who add city name and country in LS
+function addCity(cityPased, country) {          
     const city = {
-        name: cityName.value,
-        temp: tempr,
-        country: `Country`,
+        name: cityPased,
+        country: country,
     };
     
     cityInLS.push(city);
@@ -81,18 +48,38 @@ function addCity(tempr) {
     localStorage.setItem('AddedCity', JSON.stringify(cityInLS));
 };
 
-function requestCityData(city) {
+// When clicked on weather header (title and sun icon) refresh page
+document.querySelectorAll('.refresh').forEach((item) => {
+    item.addEventListener('click', event => {
+      location.reload();
+    })
+});
+
+// On load refresh data for each city pulling its name from LS
+window.onload = () => {
+    cityInLS.map((city, index) => {
+        setTimeout(() => {
+            requestCityData(city.name, city.country);
+          }, 500*index);
+    });
+}
+
+// funtion for requesting API 1 (city temperature)
+function requestCityData(city, country) {
     $.ajax({
         method: 'GET',
         url: 'https://api.api-ninjas.com/v1/weather?city=' + city,
         headers: { 'X-Api-Key': 'NpbkZwyOilO2PC3FrakOQg==gaOA2SG7o5Qfar1I'},
         contentType: 'application/json',
         success: function(result) {
-            console.log(result);
-            let cityTemp = result.temp;
-            addCity(cityTemp);
-            displayCityList();
-            requestCityData2();
+            let cardCity = `<article class="added_city">
+                <h3>${city}</h3>
+                <p>${country}</p>
+                <span>${result.temp}°C</span>
+                <a href="#" id="${city}" class="viewCity">View City</a>
+                </article>`;
+            displayCity.innerHTML += cardCity;
+            showViewCityDeatils();
 
             cityName.value = ``;
             errorMessage.style.display = 'none';
@@ -105,43 +92,29 @@ function requestCityData(city) {
     });
 }
 
+// function for requsting API 2 (forecast) for country name and puting it on each city card (because on first API there is no come back data for city and state)
 function requestCityData2() {
-    for (const i in cityInLS) {
-        $.ajax({
-            method: 'GET',
-            url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityInLS[i].name}/next3days?key=7FK84ZF37VZJ8R7K9872V8EXG`,
-            headers: { 'Access-Control-Allow-Origin': 'http://127.0.0.1:5500/'},
-            contentType: 'application/json',
-            success: function(result) {
-                console.log(result);
-                let cityCountry = result.resolvedAddress.split(',').pop();
-                cityInLS[i].country = cityCountry;
-                localStorage.setItem(`AddedCity`, JSON.stringify(cityInLS));
-            },
-            error: function ajaxError(jqXHR) {
-                console.error('Error: ', jqXHR.responseText);
-            }
-        });
-    }
+    $.ajax({
+        method: 'GET',
+        url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityName.value}/next3days?key=7FK84ZF37VZJ8R7K9872V8EXG`,
+        headers: { 'Access-Control-Allow-Origin': 'http://127.0.0.1:5500/'},
+        contentType: 'application/json',
+        success: function(result) {
+            let cityCountry = result.resolvedAddress.split(',').pop();
+            addCity(cityName.value, cityCountry);
+        },
+        error: function ajaxError(jqXHR) {
+            console.error('Error: ', jqXHR.responseText);
+        }
+    });
 }
 
-function displayCityList() {
-    cityInLS.map((city) => {
-        
-        let cardCity = `<article class="added_city">
-        <h3>${city.name}</h3>
-        <p>${city.country}</p>
-        <span>${city.temp}°C</span>
-        <a href="#" id="${city.name}" class="viewCity">View City</a>
-        </article>`;
-        displayCity.innerHTML += cardCity;
-    });
-
+// function for calling API 2 (forecast) and showing it the screen on second page
+function showViewCityDeatils() {
     const btnViewCity = document.querySelectorAll(`.viewCity`);
 
     for (let i = 0; i < btnViewCity.length; i++) {
         btnViewCity[i].addEventListener(`click`, function(e) {
-            console.log(e.target.id);
             sectionAddCity.style.display = `none`;
             displayCity.style.display = `none`;
             wrapperForecast.style.display = 'block';
@@ -159,7 +132,8 @@ function displayCityList() {
 
                     cityForecast.textContent = result.address;
                     region.textContent = regionLocation;
-                    position.textContent = `${result.latitude}°N, ${result.longitude}°E`;
+                    positionN.textContent = `${result.latitude}°N`; 
+                    positionE.textContent = `${result.longitude}°E`;
                     
                     temperature.textContent = Math.ceil((result.currentConditions.temp - 32) / 1.8) + '°C';
                     tempIcon.src = 'images/WeatherIcon/' + result.currentConditions.icon + '.png';
@@ -227,31 +201,36 @@ function displayCityList() {
     }
 }
 
-addCityBtn.addEventListener(`click`, function() {
-    if(cityName.value == ``) {
-        errorMessage.textContent = `Empty field`;
-        errorMessage.style.display = `block`;
-    } else {
-        errorMessage.style.display = `none`;
-        if(!regExInput.test(cityName.value)) {
-            errorMessage.textContent = `Incorrect format search`;
-            errorMessage.style.display = 'block';
+// On click add city and + adding it to the first page after validation if the input text is valid
+for (let i = 0; i < addCityBtn.length; i++) {
+    addCityBtn[i].addEventListener(`click`, function() {
+        if(cityName.value == ``) {
+            errorMessage.textContent = `Empty field`;
+            errorMessage.style.display = `block`;
         } else {
-            errorMessage.style.display = 'none';
-            if(cityInLS.length == 5) {
+            errorMessage.style.display = `none`;
+            if(!regExInput.test(cityName.value)) {
+                errorMessage.textContent = `Incorrect format search`;
                 errorMessage.style.display = 'block';
-                errorMessage.textContent = `Favorites full!`;
             } else {
                 errorMessage.style.display = 'none';
-                if (cityInLS.some(city => city.name === cityName.value)) {
+                if(cityInLS.length == 5) {
                     errorMessage.style.display = 'block';
-                    errorMessage.textContent = `City is in favorites`;
+                    errorMessage.textContent = `Favorites full!`;
                 } else {
-                    displayCity.innerHTML = ``;
-                    requestCityData(cityName.value);
                     errorMessage.style.display = 'none';
+                    if (cityInLS.some(city => city.name === cityName.value)) {
+                        errorMessage.style.display = 'block';
+                        errorMessage.textContent = `City is in favorites`;
+                    } else {
+                        requestCityData2();
+                        setTimeout(() => {
+                            requestCityData(cityName.value, cityInLS[cityInLS.length - 1].country);
+                          }, 500)
+                        errorMessage.style.display = 'none';
+                    }
                 }
             }
         }
-    }
-});
+    });
+}
