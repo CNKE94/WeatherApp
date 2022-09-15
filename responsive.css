@@ -1,0 +1,147 @@
+/* Reponsive for Tablet */
+
+@media screen and (max-width: 768px) {
+    /* Main page */
+
+    #main header {
+        height: 8%;
+        font-size: 0.9em;
+    }
+
+    #main #add_city {
+        width: 85%;
+        padding: 0;
+        padding-top: 1em;
+        height: 25%;
+    }
+
+    #main #add_city > p {
+        margin-bottom: 1.5em;
+    }
+
+    #main #displayed_city {
+        height: 60%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 1fr;
+        gap: 1em;
+    }
+
+    #main #displayed_city .added_city {
+        width: 100%;
+        height: 100%;
+    }
+
+    #main #displayed_city .added_city > h3 {
+        margin-bottom: 0.5em;
+    }
+
+    #main #displayed_city .added_city > p {
+        margin-bottom: 0.8em;
+    }
+
+    #main #displayed_city .added_city > span {
+        margin-bottom: 0.4em;
+    }
+
+    #main #displayed_city .added_city > a {
+        padding: 0.5em 1em;
+    }
+
+    /* Second page */
+
+    #wrapperForecast #cityInfo {
+        width: 100%;
+    }
+
+    #wrapperForecast #cityInfo #cityHeader > p {
+        margin-bottom: 0.9em;
+    }
+
+    #wrapperForecast #cityInfo #cityHeader #position {
+        flex-direction: column;
+    }
+
+    #wrapperForecast #cityInfo #cityHeader #position #positionN {
+        margin-bottom: 0.3em;
+    }
+    
+    #wrapperForecast #cityInfo #cityHeader #position #comma {
+        display: none;
+    }
+
+    .forecastDays {
+        overflow: scroll;
+        overflow-y: hidden;
+    }
+
+    .forecastDays > article {
+        margin-right: 1em;
+    }
+    
+    .forecastDays::-webkit-scrollbar {
+        height: 0.6em;
+    }
+    
+    .forecastDays::-webkit-scrollbar-track {
+        border-radius: 0.5em;
+        background: rgb(218, 218, 218);
+    }
+    
+    .forecastDays::-webkit-scrollbar-thumb {
+        background: rgb(46, 46, 103);
+        border-radius: 0.5em;
+    }
+}
+
+/* Responsive for mobile phone */
+
+@media screen and (max-width: 480px) {
+    #main {
+        height: 128vh !important;
+    }
+
+    #main #header {
+        font-size: 0.6em;
+        height: 6%;
+    }
+
+    #main #add_city {
+        padding-top: 1em;
+        height: 20%;
+    }
+
+    #main #add_city #input_field #type_error {
+        padding: 0.25em 1.8em;
+    }
+
+    #main #displayed_city {
+        height: 65%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 1fr);
+        gap: 1em;
+    }
+
+    #main #displayed_city .added_city {
+        height: 100%;
+    }
+
+    #wrapperForecast #cityInfo {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1em 0;
+        height: 42vh;
+    }
+
+    #wrapperForecast #cityInfo #cityHeader {
+        grid-column: span 2;
+    }
+
+    #wrapperForecast #cityInfo #cityTemp > p {
+        font-size: 2.5em;
+    }
+
+    #wrapperForecast #cityInfo > div:nth-child(2) {
+        text-align: left;
+    }
+}
