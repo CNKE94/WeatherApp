@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherApp</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="shortcut icon" href="images/WeatherAppIcon.png" type="image/x-icon">
 </head>
 <body>
     <div id="wrapper">
@@ -26,9 +28,10 @@
                 <h3>Add Cities</h3>
                 <p>Add 5 cities whose temperature you want to track</p>
                 <div id="input_field">
+                    <button class="plus addCityBtn">+</button>
                     <input type="text" name="text" id="input_text" placeholder="Add city...">
-                    <button id="input_btn">Add</button>
-                    <p id="type_error">error</p>
+                    <button id="input_btn" class="addCityBtn">Add</button>
+                    <p id="type_error"></p>
                 </div>
             </section>
 
@@ -46,7 +49,11 @@
                     <div id="cityHeader">
                         <h2 id="cityForecast"></h2>
                         <p id="region"></p>
-                        <p id="position"></p>
+                        <div id="position">
+                            <p id="positionN"></p>
+                            <p id="comma">,&nbsp</p>
+                            <p id="positionE"></p>
+                        </div>
                     </div>
 
                     <!-- Main city temperature and image of weather-->
